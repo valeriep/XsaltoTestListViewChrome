@@ -1,0 +1,33 @@
+var serviceURL = "http://dynastar-chrome.xsalto.com/Chrome/";
+
+var valeurNote;
+
+$(document).bind('pageinit', function(event) {
+	getPisteList('smith');
+});
+
+
+function getPisteList(userId) {
+	$.getJSON("http://dynastar-chrome.xsalto.com/Chrome/smith.json",{label: "smith" })
+	.done(function(data) {
+		$('#listPistes li').remove();
+		valeurNote = '3.5';
+		$.each(data, function(index, piste) {
+		$('#listPistes').append('<li><div class="ui-li-icon"><img src="http://dynastar-chrome.xsalto.com/Chrome/images/tree_mini.png"  alt="Piste"></div> ' +
+					'<div class="texte">' + 
+					'<a href="detailPiste.html?piste.idPiste=' + piste.id + '">' + piste.label + 
+					'</a></div>' +
+					'<div class="note_globale">' +
+					'<span>Note</span>' +
+					'<div id="star" ></div>' + 
+					'<strong>' + valeurNote + '</strong>');
+			});
+		$('#listPistes').listview('refresh');
+	})
+	.fail(function( jqxhr, textStatus, error ) {
+var err = textStatus + ', ' + error;
+console.log( "Request Failed: " + err);
+});
+}
+
+
