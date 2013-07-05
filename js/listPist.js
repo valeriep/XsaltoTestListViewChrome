@@ -8,7 +8,7 @@ $(document).bind('pageinit', function(event) {
 
 
 function getPisteList(userId) {
-	$.getJSON("/Chrome/smith.json",{label: "smith" })
+	$.getJSON("smith.json",{label: "smith" })
 	.done(function(data) {
 		$('#liste_pistes li').remove();
 		valeurNote = '3.5';
